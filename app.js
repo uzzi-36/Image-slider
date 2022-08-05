@@ -1,8 +1,8 @@
 function handler(event) {
 
-    // console.log(event);
-    // console.log("offsetX: ", event.offsetX);
-    // console.log("clientWidth: ", event.target.clientWidth);
+     console.log(event);
+     console.log("offsetX: ", event.offsetX);
+     console.log("clientWidth: ", event.target.clientWidth);
 
     let clickX = event.offsetX;
     let imageCurrentRenderWidth = event.target.clientWidth;
@@ -38,3 +38,32 @@ function handler(event) {
         document.querySelector("#slider").src = `./img/${images[nextImageIndex]}`
     }
 }
+let isMouseOnImage = false;
+
+        setInterval(() => {
+
+            if (!isMouseOnImage) {
+
+                let images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
+                let currentImageUrl = document.querySelector("#slider").src;
+                currentImageUrl = currentImageUrl.split("/img/")[1];
+
+                let nextImageIndex = (images.indexOf(currentImageUrl) + 1);
+                console.log(currentImageUrl);
+                console.log(nextImageIndex);
+
+                if (nextImageIndex > images.length - 1) {
+                    nextImageIndex = 0;
+                }
+                document.querySelector("#slider").src = `./img/${images[nextImageIndex]}`
+            }
+        }, 4000);
+
+        function onenter() {
+            console.log("onmouseover");
+            isMouseOnImage = true;
+        }
+        function onmouseaway() {
+            console.log("onmouseaway");
+            isMouseOnImage = false;
+        }
